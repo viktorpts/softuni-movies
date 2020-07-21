@@ -1,0 +1,11 @@
+<div class="movie">
+    <h2>Title:{{title}}</h2>
+    <img src="{{image}}">
+    <p>Available Tickets: {{tickets}}</p>
+    <div class="btn-group">
+        <button><a href="#/edit/{{objectId}}">Edit</a></button>
+        <button><a href="#/delete/{{objectId}}">Delete</a></button>
+        <button><a href="#/buy/{{objectId}}?origin={{@root.origin}}">Buy Ticket</a></button>
+        <button><a href="#/details/{{objectId}}">Details</a></button>
+    </div>
+</div>

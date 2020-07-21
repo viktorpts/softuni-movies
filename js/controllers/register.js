@@ -12,20 +12,17 @@ export default async function register() {
 }
 
 export async function registerPost() {
-    if (this.params.password !== this.params.repeatPassword) {
-        alert('Password don\'t match');
-        return;
-    }
-    if (this.params.username.length < 3) {
-        alert('Username must be atleast 3 characters long');
-        return;
-    }
-    if (this.params.password.length < 6) {
-        alert('Password must be atleast 6 characters long');
-        return;
-    }
-
     try {
+        if (this.params.password !== this.params.repeatPassword) {
+            throw new Error('Password don\'t match');
+        }
+        if (this.params.username.length < 3) {
+            throw new Error('Username must be atleast 3 characters long');
+        }
+        if (this.params.password.length < 6) {
+            throw new Error('Password must be atleast 6 characters long');
+        }
+
         const result = await apiRegister(this.params.username, this.params.password);
         if (result.hasOwnProperty('errorData')) {
             const error = new Error();

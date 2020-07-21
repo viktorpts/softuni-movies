@@ -166,10 +166,11 @@ export async function deleteMovie(id) {
 }
 
 // get movies by user ID
-export async function getMovieByOwner(ownerId) {
+export async function getMovieByOwner() {
     beginRequest();
 
     const token = localStorage.getItem('userToken');
+    const ownerId = localStorage.getItem('userId');
 
     const result = (await fetch(host(endpoints.MOVIES + `?where=ownerId%3D%27${ownerId}%27`), {
         headers: {
