@@ -1,20 +1,21 @@
 {{>header}}
 <div id="editMovie">
     <h1>Edit movie</h1>
-    <form action="#/edit" method="POST">
+    {{#with movie}}
+    <form action="#/edit/{{objectId}}" method="POST">
         <label>Title</label>
-        <input type="text" name="title" value="Us (2019)" id="editTitle">
+        <input type="text" name="title" value="{{title}}" id="editTitle">
         <label>Image Url</label>
-        <input type="text" name="image" id="editImage"
-            value="https://m.media-amazon.com/images/M/MV5BZTliNWJhM2YtNDc1MC00YTk1LWE2MGYtZmE4M2Y5ODdlNzQzXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_UX140_CR0,0,140,209_AL_.jpg">
+        <input type="text" name="image" id="editImage" value="{{image}}" />
         <label>Description</label>
         <textarea type="text" id="editDescription"
-            name="description">A family's serenity turns to chaos when a group of doppelgängers begins to terrorize them.</textarea>
+            name="description">{{description}}</textarea>
         <label>Genres</label>
-        <input type="text" name="genres" value="Horror,Triller" id="editGenres">
+        <input type="text" name="genres" value="{{genres}}" id="editGenres">
         <label>Available Tickets</label>
-        <input type="number" name="tickets" value="50" id="editTickets">
+        <input type="number" name="tickets" value="{{tickets}}" id="editTickets">
         <input type="submit" value="Edit">
     </form>
+    {{/with}}
 </div>
 {{>footer}}

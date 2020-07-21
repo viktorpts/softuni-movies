@@ -1,5 +1,5 @@
 import { showInfo, showError } from '../notification.js';
-import { createMovie, getMovies, buyTicket as apiBuyTicket, getMovieByOwner, getMovieById } from '../data.js';
+import { createMovie, getMovies, buyTicket as apiBuyTicket, getMovieByOwner, getMovieById, updateMovie } from '../data.js';
 
 
 export default async function catalog() {
@@ -11,7 +11,7 @@ export default async function catalog() {
 
     const movies = await getMovies();
     this.app.userData.movies = movies;
-    const context = Object.assign({ origin: encodeURIComponent('#/catalog')}, this.app.userData);
+    const context = Object.assign({ origin: encodeURIComponent('#/catalog') }, this.app.userData);
 
     this.partial('./templates/movie/catalog.hbs', context);
 }
@@ -94,7 +94,53 @@ export async function edit() {
         footer: await this.load('./templates/common/footer.hbs'),
     };
 
-    this.partial('./templates/movie/edit.hbs', this.app.userData);
+    const movieId = this.params.id;
+
+    let movie = this.app.userData.movies.find(m => m.objectId == movieId);
+    if (movie === undefined) {
+        movie = await getMovieById(movieId);
+    }
+    const context = Object.assign({ movie }, this.app.userData);
+
+    this.partial('./templates/movie/edit.hbs', context);
+}
+
+export async function editPost() {
+    const movieId = this.params.id;
+
+    try {
+        if (this.params.title.length === 0) {
+            throw new Error('Title is required');
+        }
+
+        const movie = {
+            title: this.params.title,
+            image: this.params.image,
+            description: this.params.description,
+            genres: this.params.genres,
+            tickets: Number(this.params.tickets)
+        };
+
+        const result = await updateMovie(movieId, movie);
+
+        if (result.hasOwnProperty('errorData')) {
+            const error = new Error();
+            Object.assign(error, result);
+            throw error;
+        }
+
+        for (let i = 0; i < this.app.userData.movies.length; i++) {
+            if (this.app.userData.movies[i].objectId == movieId) {
+                this.app.userData.movies.splice(i, 1);
+            }
+        }
+
+        showInfo('Movie edited');
+        this.redirect('#/details/' + result.objectId);
+    } catch (err) {
+        console.error(err);
+        showError(err.message);
+    }
 }
 
 export async function buyTicket() {
