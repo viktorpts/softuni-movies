@@ -1,5 +1,5 @@
 import { showInfo, showError } from '../notification.js';
-import { createMovie, getMovies, buyTicket as apiBuyTicket, getMovieByOwner, getMovieById, updateMovie } from '../data.js';
+import { createMovie, getMovies, buyTicket as apiBuyTicket, getMovieByOwner, getMovieById, updateMovie, deleteMovie as apiDelete } from '../data.js';
 
 
 export default async function catalog() {
@@ -163,6 +163,31 @@ export async function buyTicket() {
         showInfo(`Bought ticket for ${movie.title}`);
 
         this.redirect(this.params.origin);
+    } catch (err) {
+        console.error(err);
+        showError(err.message);
+    }
+}
+
+export async function deleteMovie() {
+    if (confirm('Are you sure you want to delete this movie?') == false) {
+        return this.redirect('#/my_movies');
+    }
+
+    const movieId = this.params.id;
+
+    try {
+        const result = await apiDelete(movieId);
+
+        if (result.hasOwnProperty('errorData')) {
+            const error = new Error();
+            Object.assign(error, result);
+            throw error;
+        }
+
+        showInfo('Move deleted');
+
+        this.redirect('#/my_movies');
     } catch (err) {
         console.error(err);
         showError(err.message);
