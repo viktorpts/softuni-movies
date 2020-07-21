@@ -1,23 +1,34 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Movies</title>
-  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="styles/notifications.css" type="text/css">
-  <link rel="stylesheet" href="styles/style.css" type="text/css">
-  <script src="./node_modules/jquery/dist/jquery.js"></script>
-  <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="./node_modules/sammy/lib/min/sammy-0.7.6.min.js"></script>
-  <script src="./node_modules/sammy/lib/min/plugins/sammy.handlebars-0.7.6.min.js"></script>
-  <script type="module" src="./js/app.js"></script>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/notifications.css" type="text/css">
+    <link rel="stylesheet" href="styles/style.css" type="text/css">
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script src="./node_modules/sammy/lib/min/sammy-0.7.6.min.js"></script>
+    <script src="./node_modules/sammy/lib/min/plugins/sammy.handlebars-0.7.6.min.js"></script>
+    <script type="module" src="./js/app.js"></script>
 </head>
 
 <body>
-  <div id="container">    
-  </div>
-  
+    <div id="notifications">
+        <div id="loadingBox" class="notification">
+            <span>Loading …</span>
+        </div>
+        <div id="infoBox" class="notification">
+            <span>Info</span>
+        </div>
+        <div id="errorBox" class="notification">
+            <span>Error</span>
+        </div>
+    </div>
+    <div id="container">
+    </div>
+
 </body>
 
 </html>
