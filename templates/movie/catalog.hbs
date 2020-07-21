@@ -4,12 +4,14 @@
     <h1>My Movies</h1>
     {{else}}
     <h1>All Movies</h1>
-    {{/if}}
-    <form action="" method="GET">
+
+    <form action="#/catalog" method="GET">
         <label>Search genre:</label>
-        <input type="text" name="search">
+        <input type="text" name="search" value={{search}}>
         <input type="submit" value="Search">
     </form>
+    {{/if}}
+    
     <div class="movies">
         {{#if myMovies}}
 
