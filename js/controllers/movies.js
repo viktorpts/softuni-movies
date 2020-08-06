@@ -11,7 +11,7 @@ export default async function catalog() {
 
     const search = this.params.search || '';
 
-    const movies = await getMovies(search);
+    const movies = await getMovies(search, 1);
     this.app.userData.movies = movies;
     const context = Object.assign({ origin: encodeURIComponent('#/catalog'), search }, this.app.userData);
 

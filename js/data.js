@@ -73,7 +73,7 @@ export async function logout() {
 }
 
 // get all movies
-export async function getMovies(search) {
+export async function getMovies(search, page) {
     beginRequest();
 
     const token = localStorage.getItem('userToken');
