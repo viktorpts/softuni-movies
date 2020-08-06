@@ -9,7 +9,8 @@ const endpoints = {
     LOGIN: 'users/login',
     LOGOUT: 'users/logout',
     MOVIES: 'data/movies',
-    MOVIE_BY_ID: 'data/movies/'
+    MOVIE_BY_ID: 'data/movies/',
+    MOVIE_COUNT: 'data/movies/count'
 };
 
 export async function register(username, password) {
@@ -66,6 +67,33 @@ export async function logout() {
             'user-token': token
         }
     });
+
+    endRequest();
+
+    return result;
+}
+
+// get movie count
+export async function getMovieCount(search) {
+    beginRequest();
+
+    const token = localStorage.getItem('userToken');
+
+    let result;
+
+    if (!search) {
+        result = (await fetch(host(endpoints.MOVIE_COUNT), {
+            headers: {
+                'user-token': token
+            }
+        })).json();
+    } else {
+        result = (await fetch(host(endpoints.MOVIE_COUNT + `?where=${escape(`genres LIKE '%${search}%'`)}`), {
+            headers: {
+                'user-token': token
+            }
+        })).json();
+    }
 
     endRequest();
 

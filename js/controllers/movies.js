@@ -1,5 +1,5 @@
 import { showInfo, showError } from '../notification.js';
-import { createMovie, getMovies, buyTicket as apiBuyTicket, getMovieByOwner, getMovieById, updateMovie, deleteMovie as apiDelete } from '../data.js';
+import { createMovie, getMovies, buyTicket as apiBuyTicket, getMovieByOwner, getMovieById, updateMovie, deleteMovie as apiDelete, getMovieCount } from '../data.js';
 
 
 export default async function catalog() {
@@ -12,6 +12,8 @@ export default async function catalog() {
 
     const page = this.params.page || 1;
     const search = this.params.search || '';
+    const movieCount = await getMovieCount(search);
+    console.log(movieCount);
 
     const movies = await getMovies(search, page);
     this.app.userData.movies = movies;
