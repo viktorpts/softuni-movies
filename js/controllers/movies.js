@@ -9,9 +9,10 @@ export default async function catalog() {
         movie: await this.load('./templates/movie/movie.hbs')
     };
 
+    const page = this.params.page || 1;
     const search = this.params.search || '';
 
-    const movies = await getMovies(search, 1);
+    const movies = await getMovies(search, page);
     this.app.userData.movies = movies;
     const context = Object.assign({ origin: encodeURIComponent('#/catalog'), search }, this.app.userData);
 
