@@ -79,15 +79,16 @@ export async function getMovies(search, page) {
     const token = localStorage.getItem('userToken');
 
     let result;
+    const pagingQuery = `pageSize=9&offset=${(page-1)*9}`;
 
     if (!search) {
-        result = (await fetch(host(endpoints.MOVIES), {
+        result = (await fetch(host(endpoints.MOVIES + '?' + pagingQuery), {
             headers: {
                 'user-token': token
             }
         })).json();
     } else {
-        result = (await fetch(host(endpoints.MOVIES + `?where=${escape(`genres LIKE '%${search}%'`)}`), {
+        result = (await fetch(host(endpoints.MOVIES + `?where=${escape(`genres LIKE '%${search}%'`)}` + '&' + pagingQuery), {
             headers: {
                 'user-token': token
             }
