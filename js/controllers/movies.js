@@ -13,11 +13,12 @@ export default async function catalog() {
     const page = this.params.page || 1;
     const search = this.params.search || '';
     const movieCount = await getMovieCount(search);
-    console.log(movieCount);
+    const pageCount = Math.ceil(movieCount / 9);
 
     const movies = await getMovies(search, page);
     this.app.userData.movies = movies;
     const context = Object.assign({ origin: encodeURIComponent('#/catalog'), search }, this.app.userData);
+    context.paging = (new Array(pageCount)).fill(null).map((p, i) => ({number: i+1, current: page == (i+1)}));
 
     this.partial('./templates/movie/catalog.hbs', context);
 }

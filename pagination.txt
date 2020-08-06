@@ -3,3 +3,4 @@
 3. Current page is obtained from the routing params
 4. Added pagination template and referenced it in the controller
 5. Added request to get total count of movies in the database (works with search too)
+6. Construct pagination array inside controller
