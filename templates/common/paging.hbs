@@ -1,0 +1,11 @@
+<div class="paging">
+    {{#each paging}}
+
+    {{#if current}}
+    <a>{{number}}</a>
+    {{else}}
+    <a href='#/catalog?page={{number}}'>{{number}}</a>
+    {{/if}}
+
+    {{/each}}
+</div>

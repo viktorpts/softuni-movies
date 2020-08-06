@@ -1,3 +1,4 @@
 1. Modified `data.js/getMovies` to accept a second parameter `page`; updated `movies.js/catalog` accordingly
 2. Added paging query parameters to request - note how they are appended, depending on the existance of search params
 3. Current page is obtained from the routing params
+4. Added pagination template and referenced it in the controller

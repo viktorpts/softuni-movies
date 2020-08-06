@@ -179,3 +179,24 @@ footer {
   color: white;
   font-weight: bold;
 }
+
+.paging {
+    margin: 1em;
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.paging>a {
+    display: inline-block;
+    width: 2em;
+    background: #673D7E;
+    border: 2px solid #CEBED7;
+    color: white;
+}
+
+.paging>a:not([href]) {
+    background: white;
+    color: #673D7E;
+    cursor: default;
+}
